@@ -1,0 +1,9 @@
+### Proxies: get list
+POST {{url}}/api/proxies/list
+Host: {{host}}
+Connection: keep-alive
+Accept: text/json
+Referer: http://bumzone.local/invoice
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,de;q=0.6
+Authorization: Bearer {{access_token}}
+User-Agent: {{userAgent}}
