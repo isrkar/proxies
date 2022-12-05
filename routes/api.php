@@ -36,5 +36,6 @@ Route::group(
     ],
     function () {
         Route::post('list', [ProxiesController::class, 'list']);
+        Route::post('export', [ProxiesController::class, 'export']);
     }
 );
