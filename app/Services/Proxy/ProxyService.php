@@ -9,16 +9,6 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ProxyService implements ProxyInterface
 {
-
-    const DOWNLOAD_NAME = 'export.csv';
-
-    const ALLOWED_FORMATS = [
-        'ip:port@login:password',
-        'ip:port',
-        'ip',
-        'ip@login:password',
-    ];
-
     /**
      * @return ProxyDto[]
      */
@@ -63,7 +53,12 @@ class ProxyService implements ProxyInterface
         return (string)rand(80, 9000);
     }
 
-    public function export($format): StreamedResponse
+    /**
+     * @param string $format
+     *
+     * @return StreamedResponse
+     */
+    public function export(string $format): StreamedResponse
     {
         $list = $this->getProxies();
 
