@@ -1,0 +1,70 @@
+### Registration
+POST {{url}}/api/auth/registration
+Host: {{host}}
+Connection: keep-alive
+Accept: text/json
+Referer: http://bumzone.local/invoice
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,de;q=0.6
+Content-Type: application/json
+User-Agent: {{userAgent}}
+
+{
+    "name": "Test User",
+    "password": "123456",
+    "email": "test@test.ru"
+}
+
+
+### Authotization: get jwt token
+POST {{url}}/api/auth/login
+Host: {{host}}
+Connection: keep-alive
+Accept: text/json
+Referer: http://bumzone.local/invoice
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,de;q=0.6
+Content-Type: application/json
+User-Agent: {{userAgent}}
+
+{
+    "password": "123456",
+    "email": "test@test.ru"
+}
+> {%
+client.global.set("access_token", response.body.access_token);
+%}
+
+
+### Authotization: logout
+POST {{url}}/api/auth/logout
+Host: {{host}}
+Connection: keep-alive
+Accept: text/json
+Referer: http://bumzone.local/invoice
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,de;q=0.6
+Authorization: Bearer {{access_token}}
+User-Agent: {{userAgent}}
+
+
+### Authotization: refresh
+POST {{url}}/api/auth/refresh
+Host: {{host}}
+Connection: keep-alive
+Accept: text/json
+Referer: http://bumzone.local/invoice
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,de;q=0.6
+Authorization: Bearer {{access_token}}
+User-Agent: {{userAgent}}
+
+> {%
+client.global.set("access_token", response.body.access_token);
+%}
+
+### Authotization: user info
+POST {{url}}/api/auth/me
+Host: {{host}}
+Connection: keep-alive
+Accept: text/json
+Referer: http://bumzone.local/invoice
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,de;q=0.6
+Authorization: Bearer {{access_token}}
+User-Agent: {{userAgent}}
